@@ -11,7 +11,7 @@
 This is a dense existence set written in C++.
 
 This data structure is designed to allow developers to perform efficient key existence checks without needing to store the original keys in memory.
-It provides a variety of options for how the set should align its buckets in memory.
+It provides a variety of options for how the set should align data memory, to optimise for performance or memory usage.
 
 Since the set does not need to store the original keys in memory, it is much more efficient than a traditional set in situations requiring key existence checks.
 
