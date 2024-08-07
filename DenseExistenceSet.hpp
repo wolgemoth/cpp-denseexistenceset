@@ -21,8 +21,9 @@ namespace LouiEriksson {
     template<> struct Alignment<HighestPerformance> { using Type = uintptr_t; };
 
     /**
+     * @mainpage Version 1.0.0
      * @class DenseExistenceSet
-     * @brief A set allowing for efficient existence checks without needing to store the original data in memory.
+     * @details A set allowing for efficient existence checks without needing to store the original data in memory.
      *
      * @tparam AlignmentType The alignment type used by the set.
      *
