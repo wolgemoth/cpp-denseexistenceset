@@ -5,7 +5,6 @@
 - [About](#About)
 - [Instructions](#Instructions)
 - [Dependencies](#Dependencies)
-- [References](#References)
 
 ### About
 
