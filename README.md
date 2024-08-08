@@ -1,4 +1,4 @@
-# C++ DenseExistenceSet (1.0.0)
+# C++ DenseExistenceSet (1.1.0)
 
 ## Table of Contents
 
