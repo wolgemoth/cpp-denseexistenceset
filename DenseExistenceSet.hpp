@@ -19,9 +19,9 @@ namespace LouiEriksson {
     template<> struct Alignment<LowMemoryUsage>     { using Type =      char; };
     template<> struct Alignment<Balanced>           { using Type =  uint32_t; };
     template<> struct Alignment<HighestPerformance> { using Type = uintptr_t; };
-    
+
     /**
-     * @mainpage Version 1.2.0
+     * @mainpage Version 1.2.1
      * @class DenseExistenceSet
      * @details A set allowing for efficient existence checks without needing to store the original data in memory
      *
@@ -142,11 +142,33 @@ namespace LouiEriksson {
             }
         }
 
-        void Reserve(const size_t _new_capacity) {
+        /**
+         * @brief Reserves memory for the DenseExistenceSet.
+         *
+         * @param _new_capacity The new capacity to reserve.
+         * @note This method does not resize the set, only reserves memory for future elements.
+         *
+         * @see DenseExistenceSet::Capacity()
+         */
+        void Reserve(const size_t& _new_capacity) {
             m_Bits.reserve(_new_capacity);
         }
 
-        void Resize(const size_t _new_size, const boolean_t _new_value = static_cast<boolean_t>(false)) {
+        /**
+         * @brief Resize the DenseExistenceSet.
+         *
+         * This method resizes the DenseExistenceSet by calling the resize method on the internal vector.
+         *
+         * @param _new_size The new size to resize the set to.
+         * @param _new_value The optional value to fill the new elements with. (default is false).
+         * @note If the new size is smaller than the current size, the elements at the end will be removed.
+         * If the new size is greater than the current size, the new elements will be filled with the specified value.
+         *
+         * @see DenseExistenceSet::Reserve(const size_t&)
+         * @see DenseExistenceSet::Trim()
+         * @see DenseExistenceSet::Clear()
+         */
+        void Resize(const size_t& _new_size, const boolean_t& _new_value = static_cast<boolean_t>(false)) {
             m_Bits.resize(_new_size, _new_value);
         }
 
@@ -177,7 +199,6 @@ namespace LouiEriksson {
         constexpr auto Capacity() const {
             return m_Bits.size();
         }
-    };
     
 } // LouiEriksson
 
