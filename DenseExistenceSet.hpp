@@ -8,6 +8,7 @@
 
 namespace LouiEriksson {
     
+    
     struct LowestMemoryUsage  {}; /** @brief Each item is represented by 1 bit in memory. */
     struct LowMemoryUsage     {}; /** @brief Each item is represented by 8 bits in memory. */
     struct Balanced           {}; /** @brief Each item is represented by 32 bits in memory. */
@@ -21,9 +22,10 @@ namespace LouiEriksson {
     template<> struct Alignment<HighestPerformance> { using Type = uintptr_t; };
 
     /**
-     * @mainpage Version 1.0.0
+    /**
+     * @mainpage Version 1.1.0
      * @class DenseExistenceSet
-     * @details A set allowing for efficient existence checks without needing to store the original data in memory.
+     * @details A set allowing for efficient existence checks without needing to store the original data in memory
      *
      * @tparam AlignmentType The alignment type used by the set.
      *
@@ -57,7 +59,7 @@ namespace LouiEriksson {
          * @param[in] _capacity Initial capacity of the set. Must be larger than 0.
          */
         constexpr explicit DenseExistenceSet(const size_t& _capacity = 1U) {
-            m_Bits.resize(_capacity);
+            m_Bits.reserve(_capacity);
         }
 
         /**
@@ -89,7 +91,7 @@ namespace LouiEriksson {
         void Add(const size_t& _hash) {
 
             if (_hash >= m_Bits.size()) {
-                m_Bits.resize(_hash + 1U);
+                Resize(_hash + 1U);
             }
 
             m_Bits[_hash] = static_cast<boolean_t>(true);
@@ -135,11 +137,15 @@ namespace LouiEriksson {
             );
 
             if (it != m_Bits.rend()) {
-                m_Bits.resize(std::distance(it, m_Bits.rend()));
+                Resize(std::distance(it, m_Bits.rend()));
             }
             else {
                 Clear();
             }
+        }
+
+        void Resize(const size_t _new_size, const boolean_t _new_value = static_cast<boolean_t>(false)) {
+            m_Bits.resize(_new_size, _new_value);
         }
 
         /**
@@ -159,8 +165,7 @@ namespace LouiEriksson {
         constexpr auto Size() const {
             return m_Bits.size();
         }
-    };
-
+        
 } // LouiEriksson
 
 #endif //LOUI_ERIKSSON_DENSE_EXISTENCE_SET_HPP
