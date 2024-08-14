@@ -21,7 +21,7 @@ namespace LouiEriksson {
     template<> struct Alignment<HighestPerformance> { using Type = uintptr_t; };
 
     /**
-     * @mainpage Version 1.2.1
+     * @mainpage Version 1.3.0
      * @class DenseExistenceSet
      * @details A set allowing for efficient existence checks without needing to store the original data in memory
      *
@@ -197,8 +197,29 @@ namespace LouiEriksson {
          * @return The capacity of the set.
          */
         constexpr auto Capacity() const {
-            return m_Bits.size();
+            return m_Bits.capacity();
         }
+
+        using               iterator = typename std::vector<AlignmentType>::iterator;
+        using         const_iterator = typename std::vector<AlignmentType>::const_iterator;
+        using       reverse_iterator = typename std::vector<AlignmentType>::reverse_iterator;
+        using const_reverse_iterator = typename std::vector<AlignmentType>::const_reverse_iterator;
+
+              iterator  begin()       { return m_Bits.begin();  }
+        const_iterator  begin() const { return m_Bits.begin();  }
+        const_iterator cbegin() const { return m_Bits.cbegin(); }
+
+              iterator  end()       { return m_Bits.end();  }
+        const_iterator  end() const { return m_Bits.end();  }
+        const_iterator cend() const { return m_Bits.cend(); }
+
+              reverse_iterator  rbegin()       { return m_Bits.rbegin();  }
+        const_reverse_iterator  rbegin() const { return m_Bits.rbegin();  }
+        const_reverse_iterator crbegin() const { return m_Bits.crbegin(); }
+
+              reverse_iterator  rend()       { return m_Bits.rend();  }
+        const_reverse_iterator  rend() const { return m_Bits.rend();  }
+        const_reverse_iterator crend() const { return m_Bits.crend(); }
     
 } // LouiEriksson
 
